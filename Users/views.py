@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth import logout
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, UpdateView
 from .forms import UserAuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Client
 
 
@@ -11,7 +13,7 @@ class UserLoginView(LoginView):
     form_class = UserAuthenticationForm
 
 
-class ClientsListView(ListView):
+class ClientsListView(LoginRequiredMixin, ListView):
     model = Client
     template_name = 'Users/clients_list.html'
     context_object_name = 'clients'
@@ -22,7 +24,7 @@ class ClientsListView(ListView):
         return queryset
 
 
-class UpdateStatusView(UpdateView):
+class UpdateStatusView(LoginRequiredMixin, UpdateView):
     model = Client
     fields = ['status']
     template_name = 'Users/clients_list.html'
@@ -33,3 +35,8 @@ class UpdateStatusView(UpdateView):
         client.status = form.cleaned_data['status']
         client.save()
         return super().form_valid(form)
+
+
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('users:login'))
