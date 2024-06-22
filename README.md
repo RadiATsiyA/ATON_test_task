@@ -33,8 +33,23 @@
 
 ## Запуск проекта с Docker
 
+1. Склонируйте репозиторий:
 
- ```bash
+    ```bash
+    git clone git@github.com:RadiATsiyA/ATON_test_task.git
+    ```
+
+2. Перейдите в директорию проекта:
+
+    ```bash
+    cd ATON_test_task
+    ```
+
+3. Запустите сервер разработки Django:
+
+    ```bash
     docker-compose up
- ```
+    ```
+
+4. Откройте ваш браузер и перейдите по адресу [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
