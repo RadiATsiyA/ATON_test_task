@@ -33,7 +33,8 @@
 
 ## Запуск проекта с Docker
 
+
  ```bash
     docker-compose up
-    ```
+ ```
 
